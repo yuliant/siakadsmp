@@ -1,9 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 // ADMINISTRATOR //
 $route['default_controller'] = 'welcome';
 $route['admin'] = 'administrator/admin';
+$route['admin/changeimage/(:any)'] = 'administrator/admin/changeImage/$1';
+$route['admin/douploadimage'] = 'administrator/admin/doUploadImage';
 $route['sevenclass'] = 'administrator/admin/dataKelas7';
 $route['eightclass'] = 'administrator/admin/dataKelas8';
 $route['nineclass'] = 'administrator/admin/dataKelas9';
@@ -37,6 +39,8 @@ $route['form/(:any)/(:any)'] = 'guru/guru/getFormNilai/$1/$2';
 $route['form/create/(:any)/(:any)/(:any)'] = 'guru/guru/createFormNilai/$1/$2/$3';
 $route['t/profile/(:any)'] = 'guru/guru/profile/$1';
 $route['t/password/(:any)'] = 'guru/guru/ubahPassword/$1';
+$route['t/changeimage/(:any)'] = 'guru/guru/changeImage/$1';
+$route['t/douploadimage'] = 'guru/guru/doUploadImage';
 $route['score/(:any)/(:any)/(:any)'] = 'guru/guru/postNilai/$1/$2/$3';
 
 //siswa
@@ -44,3 +48,5 @@ $route['s'] = 'siswa/siswa';
 $route['s/score/(:any)'] = 'siswa/siswa/getNilai/$1';
 $route['s/profile/(:any)'] = 'siswa/siswa/getProfile/$1';
 $route['s/password/(:any)'] = 'siswa/siswa/ubahPassword/$1';
+$route['s/changeimage/(:any)'] = 'siswa/siswa/changeImage/$1';
+$route['s/douploadimage'] = 'siswa/siswa/doUploadImage';

@@ -10,15 +10,69 @@ class Guru extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_model');
+		$this->load->model('guru/M_guru', 'M_guru');
+		$this->load->config('foto');
 		if ($this->session->userdata('status_guru') == null) {
 			redirect('', 'refresh');
 		}
 	}
 
+	/**
+	 * Edit by MASRIZAL EKA YULIANTO
+	 */
+	public function changeImage($id)
+	{
+		$data['content'] = 'guru/ubah_gambar';
+		$data['user'] = $this->M_guru->getDataGuru(decrypt_url($id))->row();
+		$this->load->view('guru/index', $data);
+	}
+
+	public function doUploadImage()
+	{
+		$data = $this->M_guru->getDataGuru($this->session->userdata('id'))->row();
+
+		// cek jika ada gambar
+		$upload_image = $_FILES['image']['name'];
+		if ($upload_image) {
+			$config['allowed_types'] = $this->config->item('type_pp');
+			$config['max_size']      = $this->config->item('max_pp');
+			$config['upload_path'] = './assets/img/profile';
+
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('image')) {
+				$old_image = $data->image;
+
+				if ($old_image != 'default.jpg') {
+					unlink(FCPATH . 'assets/img/profile/' . $old_image);
+				}
+
+				$new_image = $this->upload->data('file_name');
+				$this->db->set('image', $new_image);
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+				redirect('t/changeimage/' . encrypt_url($this->session->userdata('id')));
+			}
+
+			$this->db->where('id_guru', $data->id_guru);
+			$this->db->update('tb_guru');
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Gambar profil berhasil di update</div>');
+			redirect('t/changeimage/' . encrypt_url($this->session->userdata('id')));
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Input gagal, anda harus mengupload foto</div>');
+			redirect('t/changeimage/' . encrypt_url($this->session->userdata('id')));
+		}
+	}
+
+
+
+	/**End edit */
+
 	public function index()
 	{
-
 		$data['content'] = 'guru/dasbhoard';
+		$data['user'] = $this->M_guru->getDataGuru($this->session->userdata('id'))->row();
 		$this->load->view('guru/index', $data);
 	}
 

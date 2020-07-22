@@ -12,12 +12,12 @@
   <title>Siakad</title>
 
   <!-- Custom fonts for this template-->
-  <link href="<?php echo base_url()?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<?php echo base_url() ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="<?php echo base_url()?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="<?php echo base_url()?>/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -42,9 +42,28 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo site_url('s')?>">
+        <a class="nav-link" href="<?php echo site_url('s') ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Beranda</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-heading">
+        Atur Profil
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo site_url('s/profile/') . encrypt_url($this->session->userdata('id')) ?>">
+          <i class="fas fa-user"></i>
+          <span>Profil</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo site_url('s/changeimage/') . encrypt_url($this->session->userdata('id')) ?>">
+          <i class="fas fa-user"></i>
+          <span>Ubah gambar</span></a>
       </li>
 
       <!-- Divider -->
@@ -55,16 +74,9 @@
         Dataku
       </div>
 
-      <!-- Nav Item - Charts -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
- -->
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo site_url('s/score/').encrypt_url($this->session->userdata('id'));?>">
+        <a class="nav-link" href="<?php echo site_url('s/score/') . encrypt_url($this->session->userdata('id')); ?>">
           <i class="fas fa-fw fa-table"></i>
           <span>Nilai Saya</span></a>
       </li>
@@ -117,112 +129,116 @@
               </div>
             </li>
 
-            
+
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('nama');?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('nama'); ?></span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<?php echo site_url('s/profile/'.encrypt_url($this->session->userdata('id')))?>">
+                <a class="dropdown-item" href="<?php echo site_url('s/profile/' . encrypt_url($this->session->userdata('id'))) ?>">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
-                
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
+
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                  </a>
               </div>
             </li>
 
           </ul>
 
         </nav>
-        
 
-        <?php $this->load->view($content)?>
+
+        <?php $this->load->view($content) ?>
+
+      </div>
+      <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-  </div>
-  <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Apakah anda ingin keluar?</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="<?php echo site_url('logout')?>">Logout</a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Apakah anda ingin keluar?</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="<?php echo site_url('logout') ?>">Logout</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url()?>/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="<?php echo base_url()?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url() ?>/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="<?php echo base_url()?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url() ?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="<?php echo base_url()?>/assets/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url() ?>/assets/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="<?php echo base_url()?>/assets/vendor/chart.js/Chart.min.js"></script>
-  <script src="<?php echo base_url()?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="<?php echo base_url()?>/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?php echo base_url() ?>/assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script src="<?php echo base_url()?>/assets/js/demo/datatables-demo.js"></script>
-  <script src="<?php echo base_url()?>/assets/js/demo/chart-area-demo.js"></script>
-  <script src="<?php echo base_url()?>/assets/js/demo/chart-pie-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="<?php echo base_url() ?>/assets/js/demo/datatables-demo.js"></script>
+    <script src="<?php echo base_url() ?>/assets/js/demo/chart-area-demo.js"></script>
+    <script src="<?php echo base_url() ?>/assets/js/demo/chart-pie-demo.js"></script>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-    // Setup - add a text input to each footer cell
-    $('#example thead tr').clone(true).appendTo( '#example thead' );
-    $('#example thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        $(this).html( '<input class="form-control" type="text" placeholder="'+title+'" />' );
- 
-        $( 'input', this ).on( 'keyup change', function () {
-            if ( table.column(i).search() !== this.value ) {
-                table
-                    .column(i)
-                    .search( this.value )
-                    .draw();
+    <script type="text/javascript">
+      $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+      });
+
+      $(document).ready(function() {
+        // Setup - add a text input to each footer cell
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function(i) {
+          var title = $(this).text();
+          $(this).html('<input class="form-control" type="text" placeholder="' + title + '" />');
+
+          $('input', this).on('keyup change', function() {
+            if (table.column(i).search() !== this.value) {
+              table
+                .column(i)
+                .search(this.value)
+                .draw();
             }
-        } );
-    } );
- 
-      var table = $('#example').DataTable( {
+          });
+        });
+
+        var table = $('#example').DataTable({
           orderCellsTop: true,
           fixedHeader: true
-      } );
-    } );
+        });
+      });
 
-    $('#notifikasi').slideDown('slow').delay(3000).slideUp('slow');
-    
-  </script>
+      $('#notifikasi').slideDown('slow').delay(3000).slideUp('slow');
+    </script>
 
 
 
