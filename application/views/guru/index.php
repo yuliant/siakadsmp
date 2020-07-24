@@ -31,10 +31,7 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('t') ?>">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <!-- <i class="fas fa-laugh-wink"></i> -->
-        </div>
-        <div class="sidebar-brand-text mx-3">SIAKAD SMPN 2 Krembung</div>
+        <div class="sidebar-brand-text mx-3">SIAKAD</div>
       </a>
 
       <!-- Divider -->

@@ -71,8 +71,11 @@ class Guru extends CI_Controller
 
 	public function index()
 	{
+		$id_guru = $this->session->userdata('id');
 		$data['content'] = 'guru/dasbhoard';
 		$data['tapel'] = $this->M_guru->getTapel()->row();
+		$data['jml_siswa'] = $this->M_guru->hitungMurid($id_guru)->num_rows();
+		$data['jml_kelas'] = $this->M_guru->hitungKelas($id_guru)->num_rows();
 		$data['user'] = $this->M_guru->getDataGuru($this->session->userdata('id'))->row();
 		$this->load->view('guru/index', $data);
 	}

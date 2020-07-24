@@ -137,6 +137,11 @@ class Admin extends CI_Controller
 			$this->load->view('admin/index', $data);
 		} else {
 			$data['tapel'] = $this->M_admin->getTapel()->row();
+			$data['jml_siswa'] = $this->M_admin->hitungResource(1)->num_rows();
+			$data['jml_guru'] = $this->M_admin->hitungResource(2)->num_rows();
+			$data['jml_kelas'] = $this->M_admin->hitungResource(3)->num_rows();
+			$data['jml_mapel'] = $this->M_admin->hitungResource(4)->num_rows();
+
 			$data['content'] = 'admin/dasbhoard';
 			$this->load->view('admin/index', $data);
 		}
