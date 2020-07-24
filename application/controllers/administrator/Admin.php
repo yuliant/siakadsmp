@@ -68,6 +68,62 @@ class Admin extends CI_Controller
 		}
 	}
 
+	public function inputWalas($id_kelas)
+	{
+		$data['guru_list'] = $this->M_admin->getDataGuru()->result();
+
+		$this->form_validation->set_rules('walas', 'Walas', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			$data['kelas'] = $this->M_model->getClassById($id_kelas);
+			$data['content'] = 'admin/tambah_walas';
+			$this->load->view('admin/index', $data);
+		} else {
+			$insert_data = array(
+				'id_guru_walas' => $this->input->post('walas'),
+			);
+
+			$this->db->where('id_kelas', $id_kelas);
+			$this->db->update('tbl_kelas', $insert_data);
+			$this->notifikasi = true;
+			$this->session->set_flashdata('success_add', "Wali kelas berhasil di tambahkan");
+			redirect('admin', 'refresh');
+		}
+	}
+
+	public function editWalas($id_kelas)
+	{
+		$data['guru_list'] = $this->M_admin->getDataGuru()->result();
+
+		$this->form_validation->set_rules('walas', 'Walas', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			$data['kelas'] = $this->M_model->getClassById($id_kelas);
+			$data['content'] = 'admin/edit_walas';
+			$this->load->view('admin/index', $data);
+		} else {
+			$update_data = array(
+				'id_guru_walas' => $this->input->post('walas'),
+			);
+
+			$this->db->where('id_kelas', $id_kelas);
+			$this->db->update('tbl_kelas', $update_data);
+			$this->notifikasi = true;
+			$this->session->set_flashdata('success_add', "Wali kelas berhasil di edit");
+			redirect('admin', 'refresh');
+		}
+	}
+
+	public function editTapel()
+	{
+		$update_data = array(
+			'tapel' => $this->input->post('tapel'),
+		);
+		$this->db->where('id_tapel', '1');
+		$this->db->update('const_tapel', $update_data);
+
+		$this->session->set_flashdata('success_add', "Tahun pelajaran berhasil diupdate");
+		redirect('admin', 'refresh');
+	}
+
 
 	/**End edit */
 
@@ -80,7 +136,7 @@ class Admin extends CI_Controller
 			$data['content'] = 'admin/dasbhoard';
 			$this->load->view('admin/index', $data);
 		} else {
-
+			$data['tapel'] = $this->M_admin->getTapel()->row();
 			$data['content'] = 'admin/dasbhoard';
 			$this->load->view('admin/index', $data);
 		}
@@ -176,6 +232,25 @@ class Admin extends CI_Controller
 			$data['content'] = 'admin/tambah_siswa';
 			$this->load->view('admin/index', $data);
 		} else {
+			// cek jika ada gambar
+			$upload_image = $_FILES['image']['name'];
+
+			if ($upload_image) {
+				$config['allowed_types'] = $this->config->item('type_pp');
+				$config['max_size']      = $this->config->item('max_pp');
+				$config['upload_path'] = './assets/img/profile';
+
+				$this->load->library('upload', $config);
+
+				if ($this->upload->do_upload('image')) {
+					$new_image = $this->upload->data('file_name');
+					$this->db->set('image', $new_image);
+				} else {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+					redirect('addstudent');
+				}
+			}
+
 			$insert_data = array(
 				'nisn' => $this->input->post('nisn'),
 				'j_kelamin' => $this->input->post('kelamin'),
@@ -222,6 +297,32 @@ class Admin extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 		} else {
+			$data = $this->M_admin->getDataSiswa($id_siswa)->row();
+
+			// cek jika ada gambar
+			$upload_image = $_FILES['image']['name'];
+			if ($upload_image) {
+				$config['allowed_types'] = $this->config->item('type_pp');
+				$config['max_size']      = $this->config->item('max_pp');
+				$config['upload_path'] = './assets/img/profile';
+
+				$this->load->library('upload', $config);
+
+				if ($this->upload->do_upload('image')) {
+					$old_image = $data->image;
+
+					if ($old_image != 'default.jpg') {
+						unlink(FCPATH . 'assets/img/profile/' . $old_image);
+					}
+
+					$new_image = $this->upload->data('file_name');
+					$this->db->set('image', $new_image);
+				} else {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+					redirect('changestud/' . $id_siswa . '/' . $kelas);
+				}
+			}
+
 			$insert_data = array(
 				'nisn' => $this->input->post('nisn'),
 				'j_kelamin' => $this->input->post('kelamin'),
@@ -331,6 +432,25 @@ class Admin extends CI_Controller
 			$data['content'] = 'admin/tambah_guru';
 			$this->load->view('admin/index', $data);
 		} else {
+
+			// cek jika ada gambar
+			$upload_image = $_FILES['image']['name'];
+
+			if ($upload_image) {
+				$config['allowed_types'] = $this->config->item('type_pp');
+				$config['max_size']      = $this->config->item('max_pp');
+				$config['upload_path'] = './assets/img/profile';
+
+				$this->load->library('upload', $config);
+
+				if ($this->upload->do_upload('image')) {
+					$new_image = $this->upload->data('file_name');
+					$this->db->set('image', $new_image);
+				} else {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+					redirect('addteacher');
+				}
+			}
 			$data_insert = array(
 				'nip' => $this->input->post('nip'),
 				'nign' => $this->input->post('nign'),
@@ -344,7 +464,6 @@ class Admin extends CI_Controller
 				'alamat_guru' => $this->input->post('alamat'),
 				'id_mapel' => $this->input->post('mapel'),
 				'password' => sha1($this->input->post('nign'))
-
 			);
 
 			$this->db->insert('tb_guru', $data_insert);
@@ -366,6 +485,32 @@ class Admin extends CI_Controller
 
 	function prosesEditGuru($id)
 	{
+		$data = $this->M_admin->getDataGuru($id)->row();
+
+		// cek jika ada gambar
+		$upload_image = $_FILES['image']['name'];
+		if ($upload_image) {
+			$config['allowed_types'] = $this->config->item('type_pp');
+			$config['max_size']      = $this->config->item('max_pp');
+			$config['upload_path'] = './assets/img/profile';
+
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('image')) {
+				$old_image = $data->image;
+
+				if ($old_image != 'default.jpg') {
+					unlink(FCPATH . 'assets/img/profile/' . $old_image);
+				}
+
+				$new_image = $this->upload->data('file_name');
+				$this->db->set('image', $new_image);
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+				redirect('addteacher');
+			}
+		}
+
 		$data_insert = array(
 			'nip' => $this->input->post('nip'),
 			'nign' => $this->input->post('nign'),

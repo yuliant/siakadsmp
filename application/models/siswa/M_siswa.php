@@ -7,6 +7,15 @@ class M_siswa extends CI_Model
 	/**
 	 * Edit by Masrizal Eka Yulianto
 	 */
+	public function getTapel($id = null)
+	{
+		$this->db->from('const_tapel');
+		if ($id != null) {
+			$this->db->where('id_tapel ', $id);
+		}
+		$query = $this->db->get();
+		return $query;
+	}
 
 	public function getDataSiswa($id)
 	{

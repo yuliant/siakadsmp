@@ -4,7 +4,9 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">SELAMAT DATANG, <?php echo $this->session->userdata('nama'); ?></h1>
-    <p class="mb-4">Di sistem akademi SMPN 2 Krembung tahun pelajaran <?php echo date('Y') . '/' . date('Y', strtotime("+12 months")); ?></p>
+    <p class="mb-4">
+      Di sistem akademi SMPN 2 Krembung tahun pelajaran <?php echo $tapel->tapel; ?>
+    </p>
 
     <div class="card mb-3 col-lg-6">
       <div class="row no-gutters">

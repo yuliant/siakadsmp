@@ -72,6 +72,7 @@ class Guru extends CI_Controller
 	public function index()
 	{
 		$data['content'] = 'guru/dasbhoard';
+		$data['tapel'] = $this->M_guru->getTapel()->row();
 		$data['user'] = $this->M_guru->getDataGuru($this->session->userdata('id'))->row();
 		$this->load->view('guru/index', $data);
 	}
@@ -80,8 +81,6 @@ class Guru extends CI_Controller
 	{
 
 		$data['data'] = $this->M_model->getKelasByGuru(decrypt_url($id));
-		// echo '<pre>' . var_export($data['data'], true) . '</pre>';
-		// die;
 		if ($data['data'] == null) {
 			$data['content'] = '404';
 			$this->load->view('guru/index', $data);
@@ -94,7 +93,7 @@ class Guru extends CI_Controller
 
 	function getFormNilai($id_guru, $id_kelas)
 	{
-
+		$data['tapel'] = $this->M_guru->getTapel()->row();
 		$data['data'] = $this->M_model->getFormNilai(decrypt_url($id_guru), decrypt_url($id_kelas));
 		$data['id_kelas'] = $id_kelas;
 		$data['id_guru'] = $id_guru;
@@ -102,25 +101,76 @@ class Guru extends CI_Controller
 		$this->load->view('guru/index', $data);
 	}
 
-	function createFormNilai($class, $semester, $guru)
+	public function cFormNilai()
 	{
-		$id_kelas = decrypt_url($class);
-		$id_guru = decrypt_url($guru);
+		$this->form_validation->set_rules('tapel', 'Tapel', 'required');
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Inpu nilai gagal dilakukan</div>');
+			redirect('t/changeimage/' . encrypt_url($this->session->userdata('id')));
+		} else {
+			$id_kelas = decrypt_url($this->input->post('id_kelas'));
+			$id_guru = htmlspecialchars($this->input->post('id_guru', true));
+			$semester = htmlspecialchars($this->input->post('semester', true));
+			$tapel = htmlspecialchars($this->input->post('tapel', true));
+			$id_mapel = $this->session->userdata('id_mapel');
 
-		$id_mapel = $this->session->userdata('id_mapel');
-		// $id_guru = $this->session->userdata('id');
+			$where = array('id_kelas' => $id_kelas, 'status_siswa' => 'AKTIF');
+			$this->db->where($where);
+			$get = $this->db->get('tb_siswa')->result();
 
-		$where = array('id_kelas' => $id_kelas, 'status_siswa' => 'AKTIF');
-		$this->db->where($where);
-		$get = $this->db->get('tb_siswa')->result();
-		foreach ($get as $key) {
-			$this->db->query("INSERT INTO tb_nilai(id_siswa, id_mapel, id_kelas, semester, id_guru, status_nilai)
-			VALUES ('$key->id_siswa', '$id_mapel', '$id_kelas', '$semester', '$id_guru', 'AKTIF')");
+			foreach ($get as $key) {
+				$this->db->query("INSERT INTO tb_nilai(id_siswa, 
+				id_mapel, 
+				id_kelas, 
+				semester, 
+				id_guru, 
+				status_nilai,
+				tapel)
+				
+				VALUES ('$key->id_siswa', 
+				'$id_mapel', 
+				'$id_kelas', 
+				'$semester', 
+				'$id_guru', 
+				'AKTIF',
+				'$tapel')");
+			}
+
+			$redirect = 'form/' . encrypt_url($id_guru) . '/' . encrypt_url($id_kelas);
+			redirect($redirect, 'refresh');
 		}
-
-		$redirect = 'form/' . $guru . '/' . $class;
-		redirect($redirect, 'refresh');
 	}
+
+	// function createFormNilai($class, $semester, $guru)
+	// {
+	// 	$id_kelas = decrypt_url($class);
+	// 	$id_guru = decrypt_url($guru);
+
+	// 	$id_mapel = $this->session->userdata('id_mapel');
+	// 	// $id_guru = $this->session->userdata('id');
+
+	// 	$where = array('id_kelas' => $id_kelas, 'status_siswa' => 'AKTIF');
+	// 	$this->db->where($where);
+	// 	$get = $this->db->get('tb_siswa')->result();
+	// 	foreach ($get as $key) {
+	// 		$this->db->query("INSERT INTO tb_nilai(id_siswa, 
+	// 		id_mapel, 
+	// 		id_kelas, 
+	// 		semester, 
+	// 		id_guru, 
+	// 		status_nilai)
+
+	// 		VALUES ('$key->id_siswa', 
+	// 		'$id_mapel', 
+	// 		'$id_kelas', 
+	// 		'$semester', 
+	// 		'$id_guru', 
+	// 		'AKTIF')");
+	// 	}
+
+	// 	$redirect = 'form/' . $guru . '/' . $class;
+	// 	redirect($redirect, 'refresh');
+	// }
 
 
 	function postNilai($form, $code_nilai, $kelas)

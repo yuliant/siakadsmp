@@ -69,6 +69,7 @@ class Siswa extends CI_Controller
 	public function index()
 	{
 		$data['content'] = 'siswa/datasiswa';
+		$data['tapel'] = $this->M_siswa->getTapel()->row();
 		$data['user'] = $this->M_siswa->getDataSiswa($this->session->userdata('id'))->row();
 		$this->load->view('siswa/index', $data);
 	}
