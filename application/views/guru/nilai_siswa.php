@@ -28,6 +28,15 @@
           </button>
 
         </div>
+      <?php } else { ?>
+        <div class="col-md-12 col-lg-12">
+          <a class="btn btn-success btn-icon-split btn-sm" href="<?php echo base_url('guru/guru/exportNilaiExcel/') . $id_guru . '/' . $id_kelas ?>">
+            <span class="icon text-white-50">
+              <i class="fab fa-wpforms"></i>
+            </span>
+            <span class="text">Eksport data excel</span>
+          </a>
+        </div>
       <?php } ?>
     </div>
 

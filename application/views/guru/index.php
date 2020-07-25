@@ -77,6 +77,20 @@
           <i class="fas fa-fw fa-table"></i>
           <span>Daftar Kelas</span></a>
       </li>
+      <?php
+
+      $id = $this->session->userdata('id');
+      $query = "SELECT * FROM tbl_kelas 
+        WHERE id_guru_walas = $id";
+      $subMenu = $this->db->query($query)->num_rows();
+
+      if ($subMenu != null) { ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo site_url('t/class/') . encrypt_url($this->session->userdata('id')) ?>">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Wali Kelas</span></a>
+        </li>
+      <?php } ?>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

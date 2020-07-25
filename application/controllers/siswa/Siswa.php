@@ -18,6 +18,22 @@ class Siswa extends CI_Controller
 	 * Edit by MASRIZAL EKA YULIANTO
 	 */
 
+	public function laporan_pdf($id)
+	{
+		$this->load->library('dompdf_gen');
+		$data['data'] = $this->M_siswa->getDataNilaiByID(decrypt_url($id));
+
+		$this->load->view('siswa/laporan_pdf', $data);
+
+		$paper_size = 'A4';
+		$orientation = 'portrait';
+		$html = $this->output->get_output();
+		$this->dompdf->set_paper($paper_size, $orientation);
+
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		$this->dompdf->stream("nilai_mahasiswa.pdf", array('Attachment' => 0));
+	}
 
 	public function changeImage($id)
 	{
