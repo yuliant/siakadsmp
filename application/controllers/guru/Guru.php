@@ -65,6 +65,19 @@ class Guru extends CI_Controller
 		}
 	}
 
+	public function exportNilaiExcelbyWalas($id_kelas)
+	{
+		// Load plugin PHPExcel nya
+		include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+
+		$export = $this->M_model->getFormNilai(
+			null,
+			decrypt_url($id_kelas)
+		);
+
+		$this->_formatexport($export);
+	}
+
 	public function exportNilaiExcel($id_guru, $id_kelas)
 	{
 		// Load plugin PHPExcel nya
@@ -74,9 +87,6 @@ class Guru extends CI_Controller
 			decrypt_url($id_guru),
 			decrypt_url($id_kelas)
 		);
-
-		// echo '<pre>' . var_export($export, true) . '</pre>';
-		// die;
 
 		$this->_formatexport($export);
 	}
@@ -223,6 +233,28 @@ class Guru extends CI_Controller
 		$write->save('php://output');
 	}
 
+	function getWalas($id)
+	{
+		$data['data'] = $this->M_guru->getKelasByWalas(decrypt_url($id));
+		if ($data['data'] == null) {
+			$data['content'] = '404';
+			$this->load->view('guru/index', $data);
+			return;
+		}
+
+		$data['content'] = 'guru/walas_kelas';
+		$this->load->view('guru/index', $data);
+	}
+
+	function getWalasFormNilai($id_guru, $id_kelas)
+	{
+		$data['tapel'] = $this->M_guru->getTapel()->row();
+		$data['data'] = $this->M_guru->getFormNilaiByWalas(decrypt_url($id_kelas));
+		$data['id_kelas'] = $id_kelas;
+		$data['id_guru'] = $id_guru;
+		$data['content'] = 'guru/nilai_siswa_f_walas';
+		$this->load->view('guru/index', $data);
+	}
 
 	/**End edit */
 
@@ -239,7 +271,6 @@ class Guru extends CI_Controller
 
 	function getKelas($id)
 	{
-
 		$data['data'] = $this->M_model->getKelasByGuru(decrypt_url($id));
 		if ($data['data'] == null) {
 			$data['content'] = '404';
@@ -255,6 +286,8 @@ class Guru extends CI_Controller
 	{
 		$data['tapel'] = $this->M_guru->getTapel()->row();
 		$data['data'] = $this->M_model->getFormNilai(decrypt_url($id_guru), decrypt_url($id_kelas));
+		// echo '<pre>' . var_export($data['data'], true) . '</pre>';
+		// die;
 		$data['id_kelas'] = $id_kelas;
 		$data['id_guru'] = $id_guru;
 		$data['content'] = 'guru/nilai_siswa';
@@ -306,7 +339,6 @@ class Guru extends CI_Controller
 		$id = decrypt_url($code_nilai);
 		$id_kelas = decrypt_url($kelas);
 
-
 		$get = $this->M_model->getSiswaByNilai($id);
 
 		if ($this->input->post('nilai') == null) {
@@ -317,14 +349,16 @@ class Guru extends CI_Controller
 			$data['id_nilai'] = $code_nilai . '/' . $kelas;
 			$this->load->view('guru/index', $data);
 		} else {
-
 			$nilai = $this->input->post('nilai');
 			$sql = "UPDATE tb_nilai SET $form = '$nilai' WHERE id_nilai = '$id'";
 			$this->db->query($sql);
 			$id_guru = encrypt_url($this->session->userdata('id'));
 			$this->session->set_flashdata('notif', 'Data Nilai Berhasil Diperbarui Menjadi : ' . $nilai);
-			redirect('form/' . $id_guru . '/' . $kelas, 'refresh');
-			$this->getKelas($id_guru);
+
+			redirect('t', 'refresh');
+
+			// redirect('form/' . $id_guru . '/' . $kelas, 'refresh');
+			// $this->getKelas($id_guru);
 		}
 	}
 

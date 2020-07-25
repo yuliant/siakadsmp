@@ -86,7 +86,7 @@
 
       if ($subMenu != null) { ?>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url('t/class/') . encrypt_url($this->session->userdata('id')) ?>">
+          <a class="nav-link" href="<?php echo site_url('walas/class/') . encrypt_url($this->session->userdata('id')) ?>">
             <i class="fas fa-fw fa-table"></i>
             <span>Wali Kelas</span></a>
         </li>

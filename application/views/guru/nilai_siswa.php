@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-12 col-lg-12">
         <h1 class="h3 mb-2 text-gray-800">Tabel Nilai</h1>
-        <p class="mb-4">Daftar Nilai Siswa ada disini.</p>
+        <p class="mb-4">Daftar nilai siswa kelas.</p>
       </div>
 
       <!-- Form pembuatan smt -->
@@ -49,8 +49,6 @@
       </div>
     <?php } ?>
 
-
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4" style="margin-top: 30px">
       <div class="card-header py-3">
@@ -65,6 +63,7 @@
                 <th>Nama Siswa</th>
                 <th>Kelas</th>
                 <th>Semester</th>
+                <th>Mata Pelajaran</th>
                 <th>Nilai 1</th>
                 <th>Nilai 2</th>
                 <th>Nilai 3</th>
@@ -82,6 +81,7 @@
                   <td><?php echo $key->nama_siswa ?></td>
                   <td><?php echo $key->nama_kelas . $key->sub_kelas ?></td>
                   <td><?php echo $key->semester ?></td>
+                  <td><?php echo $key->nama_mapel ?></td>
                   <!-- Nilai 1-->
                   <td>
                     <?php if ($key->nilai_1 == null) { ?>

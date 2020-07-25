@@ -5,7 +5,8 @@ class M_model extends CI_Model
 {
 	function getKelasByGuru($id_guru)
 	{
-		$sql = "SELECT * FROM tb_detail_kelas tk JOIN tbl_kelas k ON tk.id_kelas = k.id_kelas
+		$sql = "SELECT * FROM tb_detail_kelas tk 
+				JOIN tbl_kelas k ON tk.id_kelas = k.id_kelas
 				WHERE tk.id_guru='$id_guru'";
 
 		return $this->db->query($sql)->result();
@@ -33,13 +34,21 @@ class M_model extends CI_Model
 		return $this->db->query($sql)->result();
 	}
 
-	function getFormNilai($id_guru, $id_kelas)
+	function getFormNilai($id_guru = null, $id_kelas)
 	{
-		$sql = "SELECT * FROM tb_siswa s 
-		JOIN tb_nilai n on s.id_siswa = n.id_siswa 
-		JOIN tb_mapel m on m.id_mapel = n.id_mapel
-		JOIN tbl_kelas k on n.id_kelas= k.id_kelas
-		WHERE n.id_kelas='$id_kelas' AND n.id_guru='$id_guru' AND n.status_nilai ='AKTIF'";
+		if ($id_guru != null) {
+			$sql = "SELECT * FROM tb_siswa s 
+			JOIN tb_nilai n on s.id_siswa = n.id_siswa 
+			JOIN tb_mapel m on m.id_mapel = n.id_mapel
+			JOIN tbl_kelas k on n.id_kelas= k.id_kelas
+			WHERE n.id_kelas='$id_kelas' AND n.id_guru='$id_guru' AND n.status_nilai ='AKTIF'";
+		} else {
+			$sql = "SELECT * FROM tb_siswa s 
+			JOIN tb_nilai n on s.id_siswa = n.id_siswa 
+			JOIN tb_mapel m on m.id_mapel = n.id_mapel
+			JOIN tbl_kelas k on n.id_kelas= k.id_kelas
+			WHERE n.id_kelas='$id_kelas' AND n.status_nilai ='AKTIF'";
+		}
 
 		return $this->db->query($sql)->result();
 	}

@@ -8,6 +8,15 @@
       Di Sistem Informasi Akademi SMPN 2 Krembung tahun pelajaran <?php echo $tapel->tapel; ?>
     </p>
 
+    <!-- Notifikasi -->
+    <?php if ($this->session->flashdata('notif') != "") { ?>
+      <div id="notifikasi">
+        <p>
+          <div class="alert alert-success"><b><?php echo $this->session->flashdata('notif') ?></b></div>
+        </p>
+      </div>
+    <?php } ?>
+
     <div class="row">
 
       <!-- Earnings (Monthly) Card Example -->
@@ -62,7 +71,15 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title"><?php echo $user->nama_guru ?></h5>
-            <p class="card-text"><?php echo "NIP. " . $user->nip ?></p>
+            <p class="card-text">
+              <?php
+              if ($user->nip == null || $user->nip == 0) {
+                echo "Tidak ada NIP";
+              } else {
+                echo "NIP. " . $user->nip;
+              }
+              ?>
+            </p>
           </div>
         </div>
       </div>

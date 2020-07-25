@@ -37,8 +37,9 @@ $route['translate_uri_dashes'] = FALSE;
 //guru
 $route['t'] = 'guru/guru';
 $route['t/class/(:any)'] = 'guru/guru/getKelas/$1';
+$route['walas/class/(:any)'] = 'guru/guru/getWalas/$1';
+$route['formwalas/(:any)/(:any)'] = 'guru/guru/getWalasFormNilai/$1/$2';
 $route['form/(:any)/(:any)'] = 'guru/guru/getFormNilai/$1/$2';
-// $route['form/create/(:any)/(:any)/(:any)'] = 'guru/guru/createFormNilai/$1/$2/$3';
 $route['form/create'] = 'guru/guru/cFormNilai';
 $route['t/profile/(:any)'] = 'guru/guru/profile/$1';
 $route['t/password/(:any)'] = 'guru/guru/ubahPassword/$1';
