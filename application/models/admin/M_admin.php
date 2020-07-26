@@ -4,6 +4,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_admin extends CI_Model
 {
+    public function getFormNilaiByAdmin($id_kelas)
+    {
+        $sql = "SELECT * FROM tb_siswa s 
+    	JOIN tb_nilai n on s.id_siswa = n.id_siswa 
+    	JOIN tb_mapel m on m.id_mapel = n.id_mapel
+    	JOIN tbl_kelas k on n.id_kelas= k.id_kelas
+    	WHERE n.id_kelas='$id_kelas' AND n.status_nilai ='AKTIF'";
+
+        return $this->db->query($sql)->result();
+    }
+
     public function hitungResource($hitung)
     {
         if ($hitung == 1) {

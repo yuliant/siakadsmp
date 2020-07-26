@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 22, 2020 at 02:15 PM
+-- Generation Time: Jul 26, 2020 at 05:34 AM
 -- Server version: 5.7.24
--- PHP Version: 7.4.5
+-- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `const_tapel`
+--
+
+CREATE TABLE `const_tapel` (
+  `id_tapel` int(11) NOT NULL,
+  `tapel` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `const_tapel`
+--
+
+INSERT INTO `const_tapel` (`id_tapel`, `tapel`) VALUES
+(1, '2020/2021');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_kelas`
 --
 
@@ -31,28 +49,29 @@ CREATE TABLE `tbl_kelas` (
   `id_kelas` int(10) NOT NULL,
   `nama_kelas` int(2) NOT NULL,
   `sub_kelas` varchar(2) NOT NULL,
-  `access_nilai` varchar(12) NOT NULL
+  `access_nilai` varchar(12) NOT NULL,
+  `id_guru_walas` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_kelas`
 --
 
-INSERT INTO `tbl_kelas` (`id_kelas`, `nama_kelas`, `sub_kelas`, `access_nilai`) VALUES
-(1, 7, 'A', 'YES'),
-(2, 7, 'B', 'NO'),
-(3, 7, 'C', 'NO'),
-(4, 7, 'D', 'NO'),
-(5, 7, 'E', 'NO'),
-(6, 8, 'A', 'NO'),
-(7, 8, 'B', 'NO'),
-(8, 8, 'C', 'NO'),
-(9, 8, 'D', 'NO'),
-(10, 8, 'E', 'NO'),
-(11, 9, 'A', 'NO'),
-(12, 9, 'B', 'NO'),
-(13, 9, 'C', 'NO'),
-(14, 9, 'D', 'NO');
+INSERT INTO `tbl_kelas` (`id_kelas`, `nama_kelas`, `sub_kelas`, `access_nilai`, `id_guru_walas`) VALUES
+(1, 7, 'A', 'YES', 1),
+(2, 7, 'B', 'YES', 2),
+(3, 7, 'C', 'YES', 1),
+(4, 7, 'D', 'NO', NULL),
+(5, 7, 'E', 'NO', NULL),
+(6, 8, 'A', 'NO', NULL),
+(7, 8, 'B', 'NO', NULL),
+(8, 8, 'C', 'NO', NULL),
+(9, 8, 'D', 'NO', NULL),
+(10, 8, 'E', 'NO', NULL),
+(11, 9, 'A', 'NO', NULL),
+(12, 9, 'B', 'NO', NULL),
+(13, 9, 'C', 'NO', NULL),
+(14, 9, 'D', 'NO', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,7 +94,8 @@ INSERT INTO `tb_detail_kelas` (`id_detail_kelas`, `id_guru`, `id_kelas`) VALUES
 (2, 1, 2),
 (3, 2, 1),
 (4, 2, 2),
-(5, 4, 1);
+(5, 4, 1),
+(6, 6, 3);
 
 -- --------------------------------------------------------
 
@@ -108,7 +128,8 @@ INSERT INTO `tb_guru` (`id_guru`, `nip`, `nign`, `nama_guru`, `agama`, `j_kelami
 (1, 2147483647890, '12030', 'SUHARYATI, S.Pd', 'ISLAM', 'PEREMPUAN', 'SIDOARJO', '1978-09-11', 'SARJANA 1', 'GURU MAPEL', 'JL. PATTIMURA NO 7 SURABAYA', 1, '83a87e5f2e50ddd11747e70374e395900d7f4803', 'hayasaka.jpg'),
 (2, 345555443333, '12040', 'SUPARMI, S.Pd', 'ISLAM', 'PEREMPUAN', 'SIDOARJO', '1980-08-09', 'SARJANA 1', 'GURU MAPEL', 'JL. PATTIMURA', 2, '831c2c5bde0f5dcc256bef6f6095e4fe5df1e28f', 'default.jpg'),
 (3, NULL, '23457', 'SUPRIYADI', 'ISLAM', 'LAKI LAKI', 'SIDOARJO', '1988-07-07', 'DIPLOMA 1', 'ADMINISTRATOR', 'JL. PATTIMURA NO 1', 0, '743cbc40f3a66857091d82207901a6815f1af54b', 'saba.png'),
-(4, 20001992882828, '12240', 'RUDI HASAN, S.Pd', 'ISLAM', 'LAKI LAKI', 'SIDOARJO', '1988-07-06', 'SARJANA 1', 'GURU MAPEL', 'JL. KI HAJAR DEWANTORO', 3, '2eaec43984794b6ff83df317a24bf37a92bac44f', 'default.jpg');
+(4, 20001992882828, '12240', 'RUDI HASAN, S.Pd', 'ISLAM', 'LAKI LAKI', 'SIDOARJO', '1988-07-06', 'SARJANA 1', 'GURU MAPEL', 'JL. KI HAJAR DEWANTORO', 3, '2eaec43984794b6ff83df317a24bf37a92bac44f', 'default.jpg'),
+(6, 0, '8888', 'MASRIZAL EKA YULIANT', 'ISLAM', 'LAKI LAKI', 'SIDOARJO', '2020-07-22', 'SARJANA 1', 'GURU MAPEL', '  KENDAL PECABEAN', 2, '0ddb5877c896f43e8734e10b001e7f1eb92889cd', 'tohka_chan.jpg');
 
 -- --------------------------------------------------------
 
@@ -149,22 +170,25 @@ CREATE TABLE `tb_nilai` (
   `nilai_5` int(11) DEFAULT NULL,
   `nilai_6` int(11) DEFAULT NULL,
   `id_guru` int(20) NOT NULL,
-  `status_nilai` varchar(80) NOT NULL
+  `status_nilai` varchar(80) NOT NULL,
+  `tapel` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_nilai`
 --
 
-INSERT INTO `tb_nilai` (`id_nilai`, `id_siswa`, `id_mapel`, `id_kelas`, `semester`, `nilai_1`, `nilai_2`, `nilai_3`, `nilai_4`, `nilai_5`, `nilai_6`, `id_guru`, `status_nilai`) VALUES
-(1, 1, 2, 1, 'GANJIL', 70, 80, 80, 75, 76, 81, 2, 'NON AKTIF'),
-(2, 1, 2, 1, 'GENAP', 70, 81, 78, 76, 78, 81, 2, 'NON AKTIF'),
-(3, 1, 2, 8, 'GANJIL', 70, 81, 88, 85, 86, 90, 2, 'NON AKTIF'),
-(4, 1, 1, 1, 'GANJIL', 70, 87, 78, 67, 96, 90, 1, 'NON AKTIF'),
-(5, 12, 1, 1, 'GANJIL', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF'),
-(6, 14, 1, 1, 'GANJIL', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF'),
-(7, 15, 1, 1, 'GANJIL', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF'),
-(8, 17, 1, 1, 'GANJIL', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF');
+INSERT INTO `tb_nilai` (`id_nilai`, `id_siswa`, `id_mapel`, `id_kelas`, `semester`, `nilai_1`, `nilai_2`, `nilai_3`, `nilai_4`, `nilai_5`, `nilai_6`, `id_guru`, `status_nilai`, `tapel`) VALUES
+(1, 1, 2, 1, 'GANJIL', 70, 80, 80, 75, 76, 81, 2, 'NON AKTIF', '2020/2021'),
+(2, 1, 2, 1, 'GENAP', 70, 81, 78, 76, 78, 81, 2, 'NON AKTIF', '2020/2021'),
+(3, 1, 2, 8, 'GANJIL', 70, 81, 88, 85, 86, 90, 2, 'NON AKTIF', '2020/2021'),
+(4, 1, 1, 1, 'GANJIL', 70, 87, 78, 67, 96, 90, 1, 'NON AKTIF', '2020/2021'),
+(5, 12, 1, 1, 'GANJIL', 80, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', NULL),
+(6, 14, 1, 1, 'GANJIL', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', NULL),
+(7, 15, 1, 1, 'GANJIL', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', NULL),
+(8, 17, 1, 1, 'GANJIL', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', NULL),
+(10, 3, 2, 3, 'GENAP', NULL, NULL, NULL, NULL, NULL, 70, 6, 'AKTIF', '2020/2021'),
+(11, 23, 2, 3, 'GENAP', NULL, NULL, NULL, NULL, NULL, NULL, 6, 'AKTIF', '2020/2021');
 
 -- --------------------------------------------------------
 
@@ -213,11 +237,20 @@ INSERT INTO `tb_siswa` (`id_siswa`, `nisn`, `nama_siswa`, `j_kelamin`, `tmp_lahi
 (15, 124567821, 'AHMAD SALOSSA', 'LAKI LAKI', 'SIDOARJO', '2004-11-01', 'MUSA SUTRISNA', 'DINA HARTATI', '082145789022', 'KARY SWASTA', 'IBU RUMAH TANGGA', 'ISLAM', 'JL. IMAM BONJOL NOMOR 2', 1, 'AKTIF', '6665a2fd4303f070302ee70bac13fb95d19cd046', 'default.jpg'),
 (17, 1245678, 'RATIH DWI MAHARANI', 'PEREMPUAN', 'SIDOARJO', '2004-11-02', 'Subagyo', 'WULAN SRI ASTUTI', '082145789090', 'SUPIR', 'PNS', 'ISLAM', 'JL. RADEN AJENG KARTINI NO 2', 1, 'AKTIF', 'd1cdaf521cd7147aac5c83692432a5505bfa936e', 'default.jpg'),
 (18, 34789092, 'SULISTYO RUBEN SADIGAR', 'LAKI LAKI', 'SURABAYA', '2004-11-01', 'CHRIS HENDRA JUNAEDI', 'EMANUELLA VIRGINITA', '082145678949', 'PNS', 'PNS', 'KATOLIK', 'JL. MAGUWOHARJO NO 12', 2, 'AKTIF', 'b2c31c491f4ebe88858cce3665d840caa59ddc0c', 'default.jpg'),
-(20, 1200019292, 'RAFAEL', 'LAKI LAKI', 'SIDOARJO', '2005-12-02', 'SANTIAGO', 'ELIZABETH', '0821457893456', 'MANAGER', 'IBU RUMAH TANGGA', 'ISLAM', 'JL. SOEKARNO - HATTA NO 1', 4, 'AKTIF', '47f212c5dbda4e571434b0d1e60de55ea263a92b', 'default.jpg');
+(20, 1200019292, 'RAFAEL', 'LAKI LAKI', 'SIDOARJO', '2005-12-02', 'SANTIAGO', 'ELIZABETH', '0821457893456', 'MANAGER', 'IBU RUMAH TANGGA', 'ISLAM', 'JL. SOEKARNO - HATTA NO 1', 4, 'AKTIF', '47f212c5dbda4e571434b0d1e60de55ea263a92b', 'default.jpg'),
+(21, 1234567890, 'FAISYAL ROCHIMUL AMRI', 'LAKI LAKI', 'SIDOARJO', '2020-07-22', 'AHMAD', 'YULI', '089123123123', 'MANDOR', 'IBU RUMAH TANGGA', 'ISLAM', 'KENDAL', 1, 'AKTIF', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 'shipit.png'),
+(22, 123456, 'BUDI SANTOSA', 'LAKI LAKI', 'SIDOARJO', '2020-07-20', 'SULAIMAN', 'ENI', '089123123123', 'MANDOR', 'IBU RUMAH TANGA', 'ISLAM', 'KENDAL', 1, 'AKTIF', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'shipit1.png'),
+(23, 12121212, 'AMAR KUMAL', 'LAKI LAKI', 'SIDOARJO', '2020-07-16', 'HADI', 'RURI CHAN', '089111222333', 'MANDOR', 'IBU RUMAH TANGGA', 'ISLAM', 'KENDAL', 3, 'AKTIF', 'cc4723995ce819915e734147a77850427a9e95f9', 'dragon_chan.jpg');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `const_tapel`
+--
+ALTER TABLE `const_tapel`
+  ADD PRIMARY KEY (`id_tapel`);
 
 --
 -- Indexes for table `tbl_kelas`
@@ -268,6 +301,12 @@ ALTER TABLE `tb_siswa`
 --
 
 --
+-- AUTO_INCREMENT for table `const_tapel`
+--
+ALTER TABLE `const_tapel`
+  MODIFY `id_tapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
@@ -277,13 +316,13 @@ ALTER TABLE `tbl_kelas`
 -- AUTO_INCREMENT for table `tb_detail_kelas`
 --
 ALTER TABLE `tb_detail_kelas`
-  MODIFY `id_detail_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_detail_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_guru`
 --
 ALTER TABLE `tb_guru`
-  MODIFY `id_guru` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_guru` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_mapel`
@@ -295,13 +334,13 @@ ALTER TABLE `tb_mapel`
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
-  MODIFY `id_nilai` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_nilai` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
-  MODIFY `id_siswa` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_siswa` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

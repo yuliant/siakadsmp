@@ -4,8 +4,6 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Selamat Datang Admin, <?php echo $this->session->userdata('nama'); ?></h1>
-    <?php //echo date('Y') . '/' . date('Y', strtotime("+12 months")); 
-    ?>
     <p class="mb-4">
       Anda sekarang berada di dashboard admin
     </p>
@@ -121,7 +119,7 @@
         </div>
       </div>
 
-      <div class="card shadow mb-3 col-lg-6">
+      <div class="card shadow mb-3 col-lg-5">
         <div class="row no-gutters">
           <div class="col-md-4">
             <img src="<?php echo base_url('assets/img/profile/') . $user->image ?>" class="card-img" alt="...">

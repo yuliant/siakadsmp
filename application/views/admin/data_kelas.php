@@ -55,14 +55,21 @@
                       <span class="text">Guru Pengajar</span>
                     </a>
 
+                    <a href="<?php echo site_url('formadmin/') . $key->id_kelas ?>" class="btn btn-secondary btn-icon-split btn-sm">
+                      <span class="icon text-white-50"><i class="fas fa-user"></i></span>
+                      <span class="text">Penilaian Admin</span>
+                    </a>
+
+                    <br>
+
                     <?php if ($key->access_nilai == "YES") { ?>
-                      <a onclick="javascript:return confirm('Jika anda Menutup Penilaian, Maka formulir penilaian di kelas ini akan resmi berakhir!')" href="<?php echo site_url('closescore/') . $key->id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm">
+                      <a onclick="javascript:return confirm('Jika anda Menutup Penilaian, Maka formulir penilaian di kelas ini akan resmi berakhir!')" href="<?php echo site_url('closescore/') . $key->id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm mt-2">
                         <span class="icon text-white-50"><i class="fas fa-times"></i></span>
                         <span class="text">Tutup Penilaian</span>
                       </a>
 
                     <?php } else { ?>
-                      <a href="<?php echo site_url('accessscore/') . $key->id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
+                      <a href="<?php echo site_url('accessscore/') . $key->id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm mt-2">
                         <span class="icon text-white-50"><i class="fas fa-check-square"></i></span>
                         <span class="text">Izinkan Penilaian</span>
                       </a>

@@ -20,19 +20,10 @@ class Siswa extends CI_Controller
 
 	public function laporan_pdf($id)
 	{
-		$this->load->library('dompdf_gen');
+		$this->load->library('mypdf');
 		$data['data'] = $this->M_siswa->getDataNilaiByID(decrypt_url($id));
-
-		$this->load->view('siswa/laporan_pdf', $data);
-
-		$paper_size = 'A4';
-		$orientation = 'portrait';
-		$html = $this->output->get_output();
-		$this->dompdf->set_paper($paper_size, $orientation);
-
-		$this->dompdf->load_html($html);
-		$this->dompdf->render();
-		$this->dompdf->stream("nilai_mahasiswa.pdf", array('Attachment' => 0));
+		$data['nama'] = $data['data'][0]->nama_siswa;
+		$this->mypdf->generate('siswa/laporan_pdf', $data, 'laporan-mahasiswa', 'A4', 'landscape');
 	}
 
 	public function changeImage($id)

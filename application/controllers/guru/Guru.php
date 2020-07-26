@@ -357,8 +357,13 @@ class Guru extends CI_Controller
 
 			redirect('t', 'refresh');
 
-			// redirect('form/' . $id_guru . '/' . $kelas, 'refresh');
-			// $this->getKelas($id_guru);
+			// if ($this->uri->segment(1) == 'form') {
+			// 	redirect('form/' . $id_guru . '/' . $kelas, 'refresh');
+			// 	$this->getKelas($id_guru);
+			// } elseif ($this->uri->segment(1) == 'formwalas') {
+			// 	redirect('formwalas/' . $id_guru . '/' . $kelas, 'refresh');
+			// 	$this->getKelas($id_guru);
+			// }
 		}
 	}
 

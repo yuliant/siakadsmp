@@ -33,6 +33,8 @@ $route['a/change/(:any)'] = 'administrator/admin/ubahPassword/$1';
 $route['teacher/(:num)/(:num)'] = 'administrator/admin/deleteTeacherByClass/$1/$2';
 $route['404_override'] = 'control/page_404';
 $route['translate_uri_dashes'] = FALSE;
+$route['formadmin/(:any)'] = 'administrator/admin/getAdminFormNilai/$1';
+$route['scoreadmin/(:any)/(:any)/(:any)'] = 'administrator/admin/postNilai/$1/$2/$3';
 
 //guru
 $route['t'] = 'guru/guru';
