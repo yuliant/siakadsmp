@@ -54,6 +54,11 @@
 
                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Login" />
                     <hr>
+
+                    <a href="#" data-toggle="modal" data-target="#login">
+                      <span class="text">Mau login?</span>
+                    </a>
+
                     <?php if ($this->session->flashdata('failed') != "") { ?>
                       <div id="notifikasi">
                         <p>
@@ -74,6 +79,28 @@
 
     </div>
 
+  </div>
+
+  <!-- Modal login -->
+  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginLabel">Mau login?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- form tambah data menu -->
+        <div class="container">
+          Admin : 23457 <br>
+          Guru : 12030 <br>
+          Siswa : 2019098908
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->

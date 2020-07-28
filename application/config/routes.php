@@ -35,6 +35,7 @@ $route['404_override'] = 'control/page_404';
 $route['translate_uri_dashes'] = FALSE;
 $route['formadmin/(:any)'] = 'administrator/admin/getAdminFormNilai/$1';
 $route['scoreadmin/(:any)/(:any)/(:any)'] = 'administrator/admin/postNilai/$1/$2/$3';
+$route['deletenilai/(:any)/(:any)'] = 'administrator/admin/deleteDataNilai/$1/$2';
 
 //guru
 $route['t'] = 'guru/guru';
@@ -48,6 +49,7 @@ $route['t/password/(:any)'] = 'guru/guru/ubahPassword/$1';
 $route['t/changeimage/(:any)'] = 'guru/guru/changeImage/$1';
 $route['t/douploadimage'] = 'guru/guru/doUploadImage';
 $route['score/(:any)/(:any)/(:any)'] = 'guru/guru/postNilai/$1/$2/$3';
+$route['deletenilai/(:any)/(:any)/(:any)'] = 'guru/guru/deleteDataNilai/$1/$2/$3';
 
 //siswa
 $route['s'] = 'siswa/siswa';

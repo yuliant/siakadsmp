@@ -309,6 +309,15 @@ class Admin extends CI_Controller
 		$write->save('php://output');
 	}
 
+	public function deleteDataNilai($nilai, $id_kelas)
+	{
+		$id_nilai = decrypt_url($nilai);
+		$this->db->where('id_nilai', $id_nilai);
+		$this->db->delete('tb_nilai');
+
+		$this->session->set_flashdata('notif', 'Data nilai siswa berhasil dihapus secara keseluruhan');
+		redirect('formadmin/' . $id_kelas);
+	}
 	/**End edit */
 
 	public function index()

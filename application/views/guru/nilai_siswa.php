@@ -70,6 +70,7 @@
                 <th>Nilai 4</th>
                 <th>Nilai 5</th>
                 <th>Nilai 6</th>
+                <th>Aksi</th>
               </tr>
             </thead>
 
@@ -164,6 +165,16 @@
                       </a>
                     <?php } ?>
                   </td>
+
+                  <td>
+                    <a onclick="javascript:return confirm('Apakah anda yakin ingin menghapus siswa ini?')" href="<?php echo site_url('deletenilai/') . encrypt_url($key->id_nilai) . '/' . $id_guru . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-trash-alt"></i>
+                      </span>
+                      <span class="text">Hapus</span>
+                    </a>
+                  </td>
+
                 </tr>
               <?php $no++;
               } ?>

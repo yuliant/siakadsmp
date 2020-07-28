@@ -256,6 +256,19 @@ class Guru extends CI_Controller
 		$this->load->view('guru/index', $data);
 	}
 
+	public function deleteDataNilai($nilai, $guru, $kelas)
+	{
+		$id_nilai = decrypt_url($nilai);
+		$id_guru = decrypt_url($guru);
+		$id_kelas = decrypt_url($kelas);
+
+		$this->db->where('id_nilai', $id_nilai);
+		$this->db->delete('tb_nilai');
+
+		$this->session->set_flashdata('notif', 'Data nilai siswa berhasil dihapus secara keseluruhan');
+		redirect('form/' . encrypt_url($id_guru) . '/' . encrypt_url($id_kelas));
+	}
+
 	/**End edit */
 
 	public function index()
@@ -286,8 +299,7 @@ class Guru extends CI_Controller
 	{
 		$data['tapel'] = $this->M_guru->getTapel()->row();
 		$data['data'] = $this->M_model->getFormNilai(decrypt_url($id_guru), decrypt_url($id_kelas));
-		// echo '<pre>' . var_export($data['data'], true) . '</pre>';
-		// die;
+
 		$data['id_kelas'] = $id_kelas;
 		$data['id_guru'] = $id_guru;
 		$data['content'] = 'guru/nilai_siswa';
