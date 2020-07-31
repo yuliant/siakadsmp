@@ -19,10 +19,6 @@ class Admin extends CI_Controller
 		}
 	}
 
-	/**
-	 * Edit by MASRIZAL EKA YULIANTO
-	 */
-
 	public function changeImage($id)
 	{
 		$data['content'] = 'admin/ubah_gambar';
@@ -127,6 +123,7 @@ class Admin extends CI_Controller
 	function getAdminFormNilai($id_kelas)
 	{
 		$data['data'] = $this->M_admin->getFormNilaiByAdmin($id_kelas);
+		$data['tapel'] = $this->M_admin->getTapel()->row();
 		$data['id_kelas'] = $id_kelas;
 		$data['content'] = 'admin/nilai_siswa_f_admin';
 		$this->load->view('admin/index', $data);
@@ -318,7 +315,6 @@ class Admin extends CI_Controller
 		$this->session->set_flashdata('notif', 'Data nilai siswa berhasil dihapus secara keseluruhan');
 		redirect('formadmin/' . $id_kelas);
 	}
-	/**End edit */
 
 	public function index()
 	{
@@ -342,7 +338,7 @@ class Admin extends CI_Controller
 
 	function dataKelas7()
 	{
-
+		$data['tapel'] = $this->M_admin->getTapel()->row();
 		$data['data'] = $this->M_model->getSiswabyKelas(7);
 		$data['content'] = 'admin/data_kelas_tujuh';
 		$this->load->view('admin/index', $data);
@@ -350,7 +346,7 @@ class Admin extends CI_Controller
 
 	function dataKelas8()
 	{
-
+		$data['tapel'] = $this->M_admin->getTapel()->row();
 		$data['data'] = $this->M_model->getSiswabyKelas(8);
 		$data['content'] = 'admin/data_kelas_delapan';
 		$this->load->view('admin/index', $data);
@@ -358,7 +354,7 @@ class Admin extends CI_Controller
 
 	function dataKelas9()
 	{
-
+		$data['tapel'] = $this->M_admin->getTapel()->row();
 		$data['data'] = $this->M_model->getSiswabyKelas(9);
 		$data['content'] = 'admin/data_kelas_sembilan';
 		$this->load->view('admin/index', $data);
@@ -380,6 +376,7 @@ class Admin extends CI_Controller
 
 	function dataKelas()
 	{
+		$data['tapel'] = $this->M_admin->getTapel()->row();
 		$data['data'] = $this->M_model->getKelas();
 		$data['content'] = 'admin/data_kelas';
 		$this->load->view('admin/index', $data);

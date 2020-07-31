@@ -48,6 +48,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
+    <!-- UNTUK MENGGANTI WARNA SISI ADMIN -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->

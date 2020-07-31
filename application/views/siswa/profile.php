@@ -75,6 +75,20 @@
                   </a>
                 </td>
               </tr>
+              <tr>
+                <th>Image</th>
+                <td>
+                  <div class="col-lg-4">
+                    <img src="<?php echo base_url('assets/img/profile/') . $data->image ?>" class="card-img" alt="...">
+                  </div>
+                  <a href="<?php echo site_url('s/changeimage/') . encrypt_url($data->id_siswa) ?>" class="btn btn-primary btn-icon-split btn-sm mt-2">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-edit"></i>
+                    </span>
+                    <span class="text">Ubah Gambar</span>
+                  </a>
+                </td>
+              </tr>
 
             </thead>
 

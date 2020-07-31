@@ -43,6 +43,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Tahun Pelajaran</th>
                                 <th>Nama Siswa</th>
                                 <th>Kelas</th>
                                 <th>Semester</th>
@@ -61,6 +62,7 @@
                             foreach ($data as $key) { ?>
                                 <tr>
                                     <td><?php echo $no ?></td>
+                                    <td><?php echo $tapel->tapel ?></td>
                                     <td><?php echo $key->nama_siswa ?></td>
                                     <td><?php echo $key->nama_kelas . $key->sub_kelas ?></td>
                                     <td><?php echo $key->semester ?></td>
@@ -68,9 +70,9 @@
                                     <!-- Nilai 1-->
                                     <td>
                                         <?php if ($key->nilai_1 == null) { ?>
-                                            <a href="<?php echo site_url('score/nilai_1/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
+                                            <a href="<?php echo site_url('scorewalas/nilai_1/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
                                         <?php } else { ?>
-                                            <a href="<?php echo site_url('score/nilai_1/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                            <a href="<?php echo site_url('scorewalas/nilai_1/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
@@ -82,9 +84,9 @@
                                     <!--Nilai 2-->
                                     <td>
                                         <?php if ($key->nilai_2 == null) { ?>
-                                            <a href="<?php echo site_url('score/nilai_2/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
+                                            <a href="<?php echo site_url('scorewalas/nilai_2/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
                                         <?php } else { ?>
-                                            <a href="<?php echo site_url('score/nilai_2/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                            <a href="<?php echo site_url('scorewalas/nilai_2/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
@@ -96,9 +98,9 @@
                                     <!--Nilai 3-->
                                     <td>
                                         <?php if ($key->nilai_3 == null) { ?>
-                                            <a href="<?php echo site_url('score/nilai_3/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
+                                            <a href="<?php echo site_url('scorewalas/nilai_3/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
                                         <?php } else { ?>
-                                            <a href="<?php echo site_url('score/nilai_3/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                            <a href="<?php echo site_url('scorewalas/nilai_3/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
@@ -110,9 +112,9 @@
                                     <!--Nilai 4-->
                                     <td>
                                         <?php if ($key->nilai_4 == null) { ?>
-                                            <a href="<?php echo site_url('score/nilai_4/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
+                                            <a href="<?php echo site_url('scorewalas/nilai_4/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
                                         <?php } else { ?>
-                                            <a href="<?php echo site_url('score/nilai_4/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                            <a href="<?php echo site_url('scorewalas/nilai_4/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
@@ -123,9 +125,9 @@
                                     <!--Nilai 5-->
                                     <td>
                                         <?php if ($key->nilai_5 == null) { ?>
-                                            <a href="<?php echo site_url('score/nilai_5/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
+                                            <a href="<?php echo site_url('scorewalas/nilai_5/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
                                         <?php } else { ?>
-                                            <a href="<?php echo site_url('score/nilai_5/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                            <a href="<?php echo site_url('scorewalas/nilai_5/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>
@@ -137,9 +139,9 @@
                                     <!--Nilai 6-->
                                     <td>
                                         <?php if ($key->nilai_6 == null) { ?>
-                                            <a href="<?php echo site_url('score/nilai_6/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
+                                            <a href="<?php echo site_url('scorewalas/nilai_6/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"><i class="fas fa-plus"></i></span></a>
                                         <?php } else { ?>
-                                            <a href="<?php echo site_url('score/nilai_6/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                            <a href="<?php echo site_url('scorewalas/nilai_6/') . encrypt_url($key->id_nilai) . '/' . $id_kelas ?>" class="btn btn-primary btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                                 </span>

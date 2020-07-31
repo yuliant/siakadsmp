@@ -60,6 +60,7 @@
             <thead>
               <tr>
                 <th>No</th>
+                <th>Tahun Pelajaran</th>
                 <th>Nama Siswa</th>
                 <th>Kelas</th>
                 <th>Semester</th>
@@ -79,6 +80,7 @@
               foreach ($data as $key) { ?>
                 <tr>
                   <td><?php echo $no ?></td>
+                  <td><?php echo $tapel->tapel ?></td>
                   <td><?php echo $key->nama_siswa ?></td>
                   <td><?php echo $key->nama_kelas . $key->sub_kelas ?></td>
                   <td><?php echo $key->semester ?></td>

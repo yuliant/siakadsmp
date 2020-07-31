@@ -170,16 +170,6 @@
 
         <?php $this->load->view($content) ?>
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; MASRIZAL EKA YULIANTO (IG : @masrizaleka) <?= date('Y') ?></span>
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
-
       </div>
       <!-- End of Content Wrapper -->
 

@@ -49,6 +49,7 @@ $route['t/password/(:any)'] = 'guru/guru/ubahPassword/$1';
 $route['t/changeimage/(:any)'] = 'guru/guru/changeImage/$1';
 $route['t/douploadimage'] = 'guru/guru/doUploadImage';
 $route['score/(:any)/(:any)/(:any)'] = 'guru/guru/postNilai/$1/$2/$3';
+$route['scorewalas/(:any)/(:any)/(:any)'] = 'guru/guru/postNilaiWalas/$1/$2/$3';
 $route['deletenilai/(:any)/(:any)/(:any)'] = 'guru/guru/deleteDataNilai/$1/$2/$3';
 
 //siswa

@@ -14,16 +14,12 @@ class Siswa extends CI_Controller
 		}
 	}
 
-	/**
-	 * Edit by MASRIZAL EKA YULIANTO
-	 */
-
 	public function laporan_pdf($id)
 	{
 		$this->load->library('mypdf');
 		$data['data'] = $this->M_siswa->getDataNilaiByID(decrypt_url($id));
 		$data['nama'] = $data['data'][0]->nama_siswa;
-		$this->mypdf->generate('siswa/laporan_pdf', $data, 'laporan-mahasiswa', 'A4', 'landscape');
+		$this->mypdf->generate('siswa/laporan_pdf', $data, 'laporan-mahasiswa', 'F4', 'landscape');
 	}
 
 	public function changeImage($id)
@@ -71,8 +67,6 @@ class Siswa extends CI_Controller
 		}
 	}
 
-	/**End edit */
-
 	public function index()
 	{
 		$data['content'] = 'siswa/datasiswa';
@@ -95,7 +89,6 @@ class Siswa extends CI_Controller
 
 	function getProfile($id)
 	{
-
 		$data['data'] = $this->M_siswa->getProfileName(decrypt_url($id));
 		if ($data['data'] == null) {
 			$data['content'] = '404';

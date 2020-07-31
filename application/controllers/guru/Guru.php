@@ -17,9 +17,6 @@ class Guru extends CI_Controller
 		}
 	}
 
-	/**
-	 * Edit by MASRIZAL EKA YULIANTO
-	 */
 	public function changeImage($id)
 	{
 		$data['content'] = 'guru/ubah_gambar';
@@ -269,8 +266,6 @@ class Guru extends CI_Controller
 		redirect('form/' . encrypt_url($id_guru) . '/' . encrypt_url($id_kelas));
 	}
 
-	/**End edit */
-
 	public function index()
 	{
 		$id_guru = $this->session->userdata('id');
@@ -367,15 +362,32 @@ class Guru extends CI_Controller
 			$id_guru = encrypt_url($this->session->userdata('id'));
 			$this->session->set_flashdata('notif', 'Data Nilai Berhasil Diperbarui Menjadi : ' . $nilai);
 
-			redirect('t', 'refresh');
+			redirect('form/' . $id_guru . '/' . $kelas, 'refresh');
+		}
+	}
 
-			// if ($this->uri->segment(1) == 'form') {
-			// 	redirect('form/' . $id_guru . '/' . $kelas, 'refresh');
-			// 	$this->getKelas($id_guru);
-			// } elseif ($this->uri->segment(1) == 'formwalas') {
-			// 	redirect('formwalas/' . $id_guru . '/' . $kelas, 'refresh');
-			// 	$this->getKelas($id_guru);
-			// }
+	function postNilaiWalas($form, $code_nilai, $kelas)
+	{
+		$id = decrypt_url($code_nilai);
+		$id_kelas = decrypt_url($kelas);
+
+		$get = $this->M_model->getSiswaByNilai($id);
+
+		if ($this->input->post('nilai') == null) {
+			$data['content'] = 'guru/input_nilai_f_walas';
+			$data['nama'] = $get->nama_siswa;
+			$data['form'] = $form;
+			$data['nilai_ke'] = substr($form, 6);
+			$data['id_nilai'] = $code_nilai . '/' . $kelas;
+			$this->load->view('guru/index', $data);
+		} else {
+			$nilai = $this->input->post('nilai');
+			$sql = "UPDATE tb_nilai SET $form = '$nilai' WHERE id_nilai = '$id'";
+			$this->db->query($sql);
+			$id_guru = encrypt_url($this->session->userdata('id'));
+			$this->session->set_flashdata('notif', 'Data Nilai Berhasil Diperbarui Menjadi : ' . $nilai);
+
+			redirect('formwalas/' . $id_guru . '/' . $kelas, 'refresh');
 		}
 	}
 

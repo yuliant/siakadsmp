@@ -4,9 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_siswa extends CI_Model
 {
 
-	/**
-	 * Edit by Masrizal Eka Yulianto
-	 */
 	public function getTapel($id = null)
 	{
 		$this->db->from('const_tapel');
@@ -26,10 +23,6 @@ class M_siswa extends CI_Model
 		$query = $this->db->get();
 		return $query;
 	}
-
-	/**
-	 * End edit
-	 */
 
 	function getDataNilaiByID($id)
 	{

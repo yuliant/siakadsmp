@@ -18,6 +18,7 @@
               <tr>
                 <th>No</th>
                 <th>Kode Kelas</th>
+                <th>Tahun Pelajaran</th>
                 <th>Nama Kelas</th>
                 <th>Total Siswa</th>
                 <th>Walas</th>
@@ -31,6 +32,7 @@
                 <tr>
                   <td><?php echo $no ?></td>
                   <td><?php echo 'Kelas-' . $key->id_kelas ?></td>
+                  <td><?php echo $tapel->tapel ?></td>
                   <td><?php echo $key->nama_kelas . $key->sub_kelas ?></td>
                   <td><?php echo $key->total_siswa ?></td>
                   <?php if ($key->nama_guru == null) { ?>
@@ -51,12 +53,10 @@
                   <?php } ?>
                   <td>
                     <a href="<?php echo site_url('teacher/') . $key->id_kelas ?>" class="btn btn-warning btn-icon-split btn-sm">
-                      <span class="icon text-white-50"><i class="fas fa-table"></i></span>
                       <span class="text">Guru Pengajar</span>
                     </a>
 
                     <a href="<?php echo site_url('formadmin/') . $key->id_kelas ?>" class="btn btn-secondary btn-icon-split btn-sm">
-                      <span class="icon text-white-50"><i class="fas fa-user"></i></span>
                       <span class="text">Penilaian Admin</span>
                     </a>
 

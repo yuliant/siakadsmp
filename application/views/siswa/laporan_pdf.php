@@ -13,6 +13,12 @@ function predikat($nilai)
         return "E";
     }
 }
+
+function comulative_value($nilai1, $nilai2, $nilai3, $nilai4, $nilai5, $nilai6)
+{
+    return ($nilai1 + $nilai2 + $nilai3 + $nilai4 + $nilai5 + $nilai6) / 6;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,6 +69,7 @@ function predikat($nilai)
             <th>Nilai 4</th>
             <th>Nilai 5</th>
             <th>Nilai 6</th>
+            <th>Nilai Komulatif</th>
         </tr>
         <?php $no = 1;
         foreach ($data as $key) { ?>
@@ -85,23 +92,39 @@ function predikat($nilai)
                 <td>
                     <?php echo $key->nama_guru ?>
                 </td>
-                <td>
+
+                <!-- <td>
                     <?php echo predikat($key->nilai_1) ?>
-                </td>
-                <td>
+                </td> -->
+                <td><?php echo $key->nilai_1 ?></td>
+
+                <!-- <td>
                     <?php echo predikat($key->nilai_2) ?>
-                </td>
-                <td>
+                </td> -->
+                <td><?php echo $key->nilai_2 ?></td>
+
+                <!-- <td>
                     <?php echo predikat($key->nilai_3) ?>
-                </td>
-                <td>
+                </td> -->
+                <td><?php echo $key->nilai_3 ?></td>
+
+                <!-- <td>
                     <?php echo predikat($key->nilai_4) ?>
-                </td>
-                <td>
+                </td> -->
+                <td><?php echo $key->nilai_4 ?></td>
+
+                <!-- <td>
                     <?php echo predikat($key->nilai_5) ?>
-                </td>
-                <td>
+                </td> -->
+                <td><?php echo $key->nilai_5 ?></td>
+
+                <!-- <td>
                     <?php echo predikat($key->nilai_6) ?>
+                </td> -->
+                <td><?php echo $key->nilai_6 ?></td>
+
+                <td>
+                    <?php echo predikat(comulative_value($key->nilai_1, $key->nilai_2, $key->nilai_3, $key->nilai_4, $key->nilai_5, $key->nilai_6)) ?>
                 </td>
             </tr>
         <?php $no++;

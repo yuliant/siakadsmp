@@ -45,6 +45,7 @@
                                 <th>No</th>
                                 <th>Nama Siswa</th>
                                 <th>Kelas</th>
+                                <th>Tahun Pelajaran</th>
                                 <th>Semester</th>
                                 <th>Mata Pelajaran</th>
                                 <th>Nilai 1</th>
@@ -64,6 +65,7 @@
                                     <td><?php echo $no ?></td>
                                     <td><?php echo $key->nama_siswa ?></td>
                                     <td><?php echo $key->nama_kelas . $key->sub_kelas ?></td>
+                                    <td><?php echo $tapel->tapel ?></td>
                                     <td><?php echo $key->semester ?></td>
                                     <td><?php echo $key->nama_mapel ?></td>
                                     <!-- Nilai 1-->
