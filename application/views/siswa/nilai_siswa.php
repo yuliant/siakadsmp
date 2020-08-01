@@ -1,13 +1,13 @@
 <?php
 function predikat($nilai)
 {
-  if ($nilai <= 100 || $nilai > 89) {
+  if ($nilai <= 100 && $nilai > 89) {
     return "A";
-  } elseif ($nilai <= 89 || $nilai > 79) {
+  } elseif ($nilai <= 89 && $nilai > 79) {
     return "B";
-  } elseif ($nilai <= 79 || $nilai > 69) {
+  } elseif ($nilai <= 79 && $nilai > 69) {
     return "C";
-  } elseif ($nilai <= 69 || $nilai > 59) {
+  } elseif ($nilai <= 69 && $nilai > 59) {
     return "D";
   } else {
     return "E";

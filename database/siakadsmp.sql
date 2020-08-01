@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 31, 2020 at 07:33 AM
+-- Generation Time: Aug 01, 2020 at 01:54 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.19
 
@@ -183,7 +183,7 @@ INSERT INTO `tb_nilai` (`id_nilai`, `id_siswa`, `id_mapel`, `id_kelas`, `semeste
 (2, 1, 2, 1, 'GENAP', 70, 81, 78, 76, 78, 81, 2, 'NON AKTIF', '2020/2021'),
 (3, 1, 2, 8, 'GANJIL', 70, 81, 88, 85, 86, 90, 2, 'NON AKTIF', '2020/2021'),
 (4, 1, 1, 1, 'GANJIL', 70, 87, 78, 67, 96, 90, 1, 'NON AKTIF', '2020/2021'),
-(12, 12, 1, 1, 'GENAP', 70, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', '2020/2021'),
+(12, 12, 1, 1, 'GENAP', 70, 80, 60, 100, 90, NULL, 1, 'AKTIF', '2020/2021'),
 (13, 14, 1, 1, 'GENAP', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', '2020/2021'),
 (14, 15, 1, 1, 'GENAP', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', '2020/2021'),
 (15, 17, 1, 1, 'GENAP', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'AKTIF', '2020/2021'),
